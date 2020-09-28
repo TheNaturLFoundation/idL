@@ -17,7 +17,7 @@
         <Menu id="fileMenu" mnemonicParsing="false" text="File">
           <items>
             <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
+            <MenuItem mnemonicParsing="false" text="Open…" id="openMenuButton"/>
             <Menu mnemonicParsing="false" text="Open Recent" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Close" />
@@ -51,7 +51,7 @@
         </Menu>
       </menus>
     </MenuBar>
-      <TabPane prefHeight="451.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="451.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE" id="tabPane">
         <tabs>
           <Tab text="Untitled Tab 1">
             <content>

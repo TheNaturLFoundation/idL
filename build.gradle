@@ -1,25 +1,46 @@
+import io.github.fvarrui.javapackager.gradle.PackageTask
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'io.github.fvarrui:javapackager:1.2.0'
+    }
+}
 plugins {
-    id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
-group 'fr.thenaturlfoundation'
-version '1.0-BETA'
+apply plugin: 'io.github.fvarrui.javapackager.plugin'
 
-sourceCompatibility = 14
+version = "0.1.0-BETA"
+
+sourceCompatibility = 11
 
 repositories {
     mavenCentral()
 }
 
 javafx {
-    version = "14"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = ['javafx.controls', 'javafx.fxml']
+    version = "11.0.2"
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+mainClassName = 'fr.thenaturlfoundation.idl.Main'
+applicationName = 'idL'
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
 }
 
-mainClassName = 'fr.thenaturlfoundation.idl.MainApp'
+task packageMyApp(type: PackageTask, dependsOn: build) {
+    mainClass = mainClassName
+    bundleJre = true
+    generateInstaller = true
+    administratorRequired = false
+    organizationName = "The NaturL Foundation"
+}
