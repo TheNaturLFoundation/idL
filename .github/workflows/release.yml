@@ -51,12 +51,12 @@ jobs:
           name: idL
           path: build/idL/idL
       - name: Upload release assets Windows
-      if: matrix.config.os == 'windows-latest' 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ needs.create_release.outputs.upload_url }}
-        asset_name: idL-installer-${{ github.ref }}.exe
-        asset_path: build/idL_*.exe
-        asset_content_type: application/octet-stream  
+        if: matrix.config.os == 'windows-latest' 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_name: idL-installer-${{ github.ref }}.exe
+          asset_path: build/idL_*.exe
+          asset_content_type: application/octet-stream  
