@@ -44,3 +44,7 @@ task packageMyApp(type: PackageTask, dependsOn: build) {
     administratorRequired = false
     organizationName = "The NaturL Foundation"
 }
+
+task idLVersion(){
+    println version
+}

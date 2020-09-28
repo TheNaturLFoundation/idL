@@ -6,7 +6,7 @@ on:
     branches:
       - dev
 jobs:
-  compile_program_and_installers:
+  compile_program:
     name: Compile Program and installers
     runs-on: ${{ matrix.config.os }}
     strategy:
