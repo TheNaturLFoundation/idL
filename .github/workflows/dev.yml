@@ -6,8 +6,8 @@ on:
     branches:
       - dev
 jobs:
-  release_assets:
-    name: Release assets
+  compile_program_and_installers:
+    name: Compile Program and installers
     runs-on: ${{ matrix.config.os }}
     strategy:
       matrix:
@@ -25,8 +25,14 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew packageMyApp
     - name: Upload idL Windows artifact
-      if: matrix.os == 'windows-latest' 
+      if: matrix.config.os == 'windows-latest' 
       uses: actions/upload-artifact@v1.0.0
       with:
         name: idL.exe
         path: build/idL/idL.exe
+    - name: Upload idL Linux artifact
+      if: matrix.config.os == 'windows-latest' 
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: idL
+        path: build/idL/idL
