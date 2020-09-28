@@ -1,0 +1,38 @@
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+jobs:
+  release_assets:
+    name: Release assets
+    runs-on: windows-latest #${{ matrix.config.os }}
+    strategy:
+      matrix:
+        config:
+          - os: ubuntu-latest
+          - os: macos-latest
+          - os: windows-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11.0.2
+    - name: Install dependencies (Windows)
+      if: matrix.os == 'windows-latest' 
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: choco install innosetup --pre -y
+      continue-on-error: true  
+    - name: Build with Gradle
+      run: ./gradlew packageMyApp
+    - name: Upload idL Windows artifact
+      if: matrix.os == 'windows-latest' 
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: idL.exe
+        path: build/idL/idL.exe
