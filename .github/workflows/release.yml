@@ -38,25 +38,25 @@ jobs:
           java-version: 11.0.2
       - name: Build with Gradle
         run: ./gradlew packageMyApp
-    - name: Upload idL Windows artifact
-      if: matrix.config.os == 'windows-latest' 
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: idL.exe
-        path: build/idL/idL.exe
-    - name: Upload idL Linux artifact
-      if: matrix.config.os == 'ubuntu-latest' 
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: idL
-        path: build/idL/idL
-    - name: Upload release assets Windows
-    if: matrix.config.os == 'windows-latest' 
-    uses: actions/upload-release-asset@v1
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    with:
-      upload_url: ${{ needs.create_release.outputs.upload_url }}
-      asset_name: idL-installer-${{ github.ref }}.exe
-      asset_path: build/idL_*.exe
-      asset_content_type: application/octet-stream  
+      - name: Upload idL Windows artifact
+        if: matrix.config.os == 'windows-latest' 
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: idL.exe
+          path: build/idL/idL.exe
+      - name: Upload idL Linux artifact
+        if: matrix.config.os == 'ubuntu-latest' 
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: idL
+          path: build/idL/idL
+      - name: Upload release assets Windows
+        if: matrix.config.os == 'windows-latest' 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_name: idL-installer-${{ github.ref }}.exe
+          asset_path: build/idL_*.exe
+          asset_content_type: application/octet-stream  
