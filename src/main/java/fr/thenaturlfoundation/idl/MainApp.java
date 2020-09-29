@@ -8,12 +8,9 @@
 package fr.thenaturlfoundation.idl;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 
 
@@ -28,6 +25,7 @@ public class MainApp extends Application {
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         stage.setTitle("idL for naturL");
         stage.setScene(scene);
+        loader.setController(new MainController());
         stage.show();
     }
 
