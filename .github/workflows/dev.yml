@@ -37,7 +37,7 @@ jobs:
         name: idL-latest
         path: build/idL/idL
     - name: Upload macOs artifact
-      if: matrix.config.os == 'ubuntu-latest' 
+      if: matrix.config.os == 'macos-latest' 
       uses: actions/upload-artifact@v1.0.0
       with:
         name: idL-latest
