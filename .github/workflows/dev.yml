@@ -25,11 +25,11 @@ jobs:
         run: ./gradlew test
       - name: Publish Unit Test report
         if: ${{ always() }}
-          uses: peaceiris/actions-gh-pages@v3
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./build/reports/tests/test/
-            destination_dir: ${{ matrix.config.os }}-${{ steps.vars.outputs.sha_short }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/reports/tests/test/
+          destination_dir: ${{ matrix.config.os }}-${{ steps.vars.outputs.sha_short }}
       - name: Build with Gradle
         run: ./gradlew packageMyApp
       - name: Upload idL Windows artifact
