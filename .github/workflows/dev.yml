@@ -36,8 +36,10 @@ jobs:
         name: idL-macOs
         path: build/
     - name: Javadoc
+      if: matrix.config.os == 'windows-latest'
       run: ./gradlew javadoc
     - name: Deploy
+      if: matrix.config.os == 'windows-latest'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
