@@ -12,7 +12,6 @@ jobs:
     strategy:
       matrix:
         config:
-          - os: ubuntu-latest
           - os: macos-latest
           - os: windows-latest
     steps:
@@ -21,24 +20,18 @@ jobs:
     - name: Install Java
       uses: actions/setup-java@v1
       with:
-        java-version: 11.0.2
+        java-version: 15
     - name: Build with Gradle
       run: ./gradlew packageMyApp
     - name: Upload idL Windows artifact
       if: matrix.config.os == 'windows-latest' 
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: idL-latest.exe
-        path: build/idL/idL.exe
-    - name: Upload idL Linux artifact
-      if: matrix.config.os == 'ubuntu-latest' 
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: idL-latest
-        path: build/idL/idL
+        name: idL-windows.exe
+        path: build/idL/
     - name: Upload macOs artifact
       if: matrix.config.os == 'macos-latest' 
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: idL-latest
+        name: idL.app
         path: build/idL/idL.app

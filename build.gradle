@@ -10,14 +10,14 @@ buildscript {
 }
 plugins {
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 apply plugin: 'io.github.fvarrui.javapackager.plugin'
 
 version = "0.1.0-BETA"
 
-sourceCompatibility = 11
+sourceCompatibility = 15
 
 repositories {
     mavenCentral()
@@ -25,10 +25,10 @@ repositories {
 
 javafx {
     modules = ['javafx.controls', 'javafx.fxml']
-    version = "11.0.2"
+    version = "15"
 }
 
-mainClassName = 'fr.thenaturlfoundation.idl.Main'
+mainClassName = 'gui.Main'
 applicationName = 'idL'
 
 jar {
