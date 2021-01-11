@@ -44,14 +44,14 @@ jobs:
           name: idL-windows
           path: |
             build/idL/
-            build/idL_*.exe
+            build/*.exe
       - name: Upload macOs artifact
         if: matrix.config.os == 'macos-latest'
         uses: actions/upload-artifact@v1.0.0
         with:
           name: idL-macOs
             build/idL/
-            build/idL-*.dmg
+            build/*.dmg
       - name: Upload release assets Windows
         if: matrix.config.os == 'windows-latest' 
         uses: actions/upload-release-asset@v1
@@ -70,5 +70,5 @@ jobs:
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
           asset_name: idL-${{ github.ref }}.dmg
-          asset_path: build/idL-*.dmg
+          asset_path: build/idL_*.dmg
           asset_content_type: application/octet-stream
