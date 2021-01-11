@@ -28,11 +28,10 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
         name: idL-windows
-        path: |
-          build/
+        path: build/
     - name: Upload macOs artifact
       if: matrix.config.os == 'macos-latest' 
       uses: actions/upload-artifact@v1.0.0
       with:
         name: idL-macOs
-          build/
+        path: build/
