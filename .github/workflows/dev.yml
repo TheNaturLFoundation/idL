@@ -29,12 +29,24 @@ jobs:
       with:
         name: idL-windows
         path: |
-          build/idL/
-          build/*.exe
+          build/
+          !build/assets/
+          !build/distributions/
+          !build/launch4j/
+          !build/resources/
+          !build/tmp/
+          !build/classes/
+          !build/generated/
     - name: Upload macOs artifact
       if: matrix.config.os == 'macos-latest' 
       uses: actions/upload-artifact@v1.0.0
       with:
         name: idL-macOs
-          build/idL/
-          build/*.dmg
+          build/
+          !build/assets/
+          !build/distributions/
+          !build/launch4j/
+          !build/resources/
+          !build/tmp/
+          !build/classes/
+          !build/generated/
