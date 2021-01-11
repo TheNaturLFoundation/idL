@@ -15,32 +15,41 @@ jobs:
           - os: macos-latest
           - os: windows-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Install Java
-      uses: actions/setup-java@v1
-      with:
-        java-version: 15
-    - name: Build with Gradle
-      run: ./gradlew packageMyApp
-    - name: Upload idL Windows artifact
-      if: matrix.config.os == 'windows-latest' 
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: idL-windows
-        path: build/
-    - name: Upload macOs artifact
-      if: matrix.config.os == 'macos-latest' 
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: idL-macOs
-        path: build/
-    - name: Javadoc
-      if: matrix.config.os == 'windows-latest'
-      run: ./gradlew javadoc
-    - name: Deploy
-      if: matrix.config.os == 'windows-latest'
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build/docs/
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 15
+      - name: Run Unit Tests
+        run: ./gradlew test
+      - name: Publish Unit Test report
+        if: ${{ always() }}
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./build/reports/tests/test/
+            destination_dir: ${{ matrix.config.os }}-${{ steps.vars.outputs.sha_short }}
+      - name: Build with Gradle
+        run: ./gradlew packageMyApp
+      - name: Upload idL Windows artifact
+        if: matrix.config.os == 'windows-latest'
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: idL-windows
+          path: build/
+      - name: Upload macOs artifact
+        if: matrix.config.os == 'macos-latest'
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: idL-macOs
+          path: build/
+      - name: Javadoc
+        if: matrix.config.os == 'windows-latest'
+        run: ./gradlew javadoc
+      - name: Deploy
+        if: matrix.config.os == 'windows-latest'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/docs/
