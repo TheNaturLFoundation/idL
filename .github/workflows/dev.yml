@@ -30,7 +30,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/reports/tests/test/
-          destination_dir: ${{ matrix.config.os }}-${{GITHUB_SHA}}
+          destination_dir: ${{ matrix.config.os }}-$(echo ${GITHUB_SHA} | cut -c1-8)
       - name: Build with Gradle
         run: ./gradlew packageMyApp
       - name: Upload idL Windows artifact
