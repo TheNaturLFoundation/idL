@@ -30,11 +30,11 @@ jobs:
         name: idL-windows
         path: |
           build/idL/
-          build/idL-*.exe
+          build/idL_*.exe
     - name: Upload macOs artifact
       if: matrix.config.os == 'macos-latest' 
       uses: actions/upload-artifact@v1.0.0
       with:
         name: idL-macOs
           build/idL/
-          build/idL-*.dmg
+          build/idL_*.dmg
