@@ -9,7 +9,7 @@ public class MainTest {
     @Test
     @DisplayName("String Dummy Test")
     public void stringDummyTest() {
-        assertEquals("Dummy", "Dummy");
+        assertEquals("Dummy", "Dumy");
     }
 
 }
