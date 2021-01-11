@@ -56,7 +56,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_name: idL-installer-${{ github.ref }}.exe
+          asset_name: idL-${{ github.ref }}.exe
           asset_path: build/idL_*.exe
           asset_content_type: application/octet-stream
       - name: Upload release assets macOs
@@ -66,6 +66,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_name: idL.app
-          asset_path: build/idL.app
+          asset_name: idL-${{ github.ref }}.dmg
+          asset_path: build/idL-*.dmg
           asset_content_type: application/octet-stream
