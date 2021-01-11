@@ -10,6 +10,7 @@ jobs:
     name: Compile Program and installers
     runs-on: ${{ matrix.config.os }}
     strategy:
+      fail-fast: false
       matrix:
         config:
           - os: macos-latest
@@ -29,7 +30,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/reports/tests/test/
-          destination_dir: ${{ matrix.config.os }}-${GITHUB_SHA}
+          destination_dir: ${{ matrix.config.os }}-${{GITHUB_SHA}}
       - name: Build with Gradle
         run: ./gradlew packageMyApp
       - name: Upload idL Windows artifact
@@ -52,4 +53,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/docs/
+          publish_dir: ./build/docs/javadoc/
+          destination_dir: javadoc/
